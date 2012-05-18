@@ -66,7 +66,7 @@ exports.test_getTenantInfo = function(test, assert) {
 };
 
 exports.test_getServiceCatalog = function(test, assert) {
-  var client = new KeystoneClient('http://127.0.0.1:23542', '2.0', {'username': 'joe', 'apikey': 'dev'});
+  var client = new KeystoneClient('http://127.0.0.1:23542', '2.0', {'username': 'joe', 'apiKey': 'dev'});
 
   client.getServiceCatalog(function(err, data) {
     assert.ifError(err);
@@ -77,7 +77,7 @@ exports.test_getServiceCatalog = function(test, assert) {
 };
 
 exports.test_getTenantIdAndToken = function(test, assert) {
-  var client = new KeystoneClient('http://127.0.0.1:23542', '2.0', {'username': 'joe', 'apikey': 'dev'});
+  var client = new KeystoneClient('http://127.0.0.1:23542', '2.0', {'username': 'joe', 'apiKey': 'dev'});
 
   client.getTenantIdAndToken(function(err, data) {
     assert.ifError(err);
@@ -87,6 +87,3 @@ exports.test_getTenantIdAndToken = function(test, assert) {
     test.finish();
   });
 };
-
-
-
