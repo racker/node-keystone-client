@@ -38,3 +38,29 @@ exports.test_validateTokenForTenant = function(test, assert) {
     test.finish();
   });
 };
+
+exports.test_tenantInfo = function(test, assert) {
+  var client = new KeystoneClient('http://127.0.0.1:23542', '2.0');
+
+  async.waterfall([
+    function testInexistentTenantId(callback) {
+      client.tenantInfo('inexistent', function(err, data) {
+        assert.ok(err);
+        assert.equal(err.statusCode, 404);
+        callback();
+      });
+    },
+
+    function testValidTenantId(callback) {
+      client.tenantInfo('7777', function(err, data) {
+        assert.ifError(err);
+        assert.ok(data);
+        callback();
+      });
+    }
+  ],
+
+  function(err) {
+    test.finish();
+  });
+};
