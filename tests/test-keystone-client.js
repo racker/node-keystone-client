@@ -39,7 +39,7 @@ exports.test_validateTokenForTenant = function(test, assert) {
   });
 };
 
-exports.test_tenantInfo = function(test, assert) {
+exports.test_getTenantInfo = function(test, assert) {
   var client = new KeystoneClient('http://127.0.0.1:23542', '2.0');
 
   async.waterfall([
