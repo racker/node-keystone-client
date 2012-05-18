@@ -44,7 +44,7 @@ exports.test_tenantInfo = function(test, assert) {
 
   async.waterfall([
     function testInexistentTenantId(callback) {
-      client.tenantInfo('inexistent', function(err, data) {
+      client.getTenantInfo('inexistent', function(err, data) {
         assert.ok(err);
         assert.equal(err.statusCode, 404);
         callback();
@@ -52,7 +52,7 @@ exports.test_tenantInfo = function(test, assert) {
     },
 
     function testValidTenantId(callback) {
-      client.tenantInfo('7777', function(err, data) {
+      client.getTenantInfo('7777', function(err, data) {
         assert.ifError(err);
         assert.ok(data);
         callback();
