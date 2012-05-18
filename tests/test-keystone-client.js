@@ -64,3 +64,29 @@ exports.test_tenantInfo = function(test, assert) {
     test.finish();
   });
 };
+
+exports.test_getServiceCatalog = function(test, assert) {
+  var client = new KeystoneClient('http://127.0.0.1:23542', '2.0', {'username': 'joe', 'apikey': 'dev'});
+
+  client.getServiceCatalog(function(err, data) {
+    assert.ifError(err);
+    assert.ok(data);
+    assert.ok(data.length > 1);
+    test.finish();
+  });
+};
+
+exports.test_getTenantIdAndToken = function(test, assert) {
+  var client = new KeystoneClient('http://127.0.0.1:23542', '2.0', {'username': 'joe', 'apikey': 'dev'});
+
+  client.getTenantIdAndToken(function(err, data) {
+    assert.ifError(err);
+    assert.ok(data);
+    assert.equal(data.token, 'dev');
+    assert.equal(data.tenantId, '7777');
+    test.finish();
+  });
+};
+
+
+

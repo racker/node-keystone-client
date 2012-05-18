@@ -115,6 +115,7 @@ function getToken_v2_0(req, res) {
       statusCode,
       body,
       creds,
+      providedToken,
       reason = 'api was asked to fail';
 
   expires = new Date();
@@ -128,8 +129,18 @@ function getToken_v2_0(req, res) {
   }
   else {
     creds = req.body.auth;
-    tenantId = creds.tenantName;
-    username = TENANT_ID_TO_USERNAME_MAP[tenantId];
+
+    if (creds.hasOwnProperty('tenantName')) {
+      tenantId = creds.tenantName;
+      username = TENANT_ID_TO_USERNAME_MAP[tenantId];
+      providedToken = req.body.auth.token.id;
+    }
+    else if (creds.hasOwnProperty('RAX-KSKEY:apiKeyCredentials')) {
+      username = creds['RAX-KSKEY:apiKeyCredentials'].username;
+      providedToken = creds['RAX-KSKEY:apiKeyCredentials'].apiKey;
+      tenantId = USERNAME_TO_TENANT_ID_MAP[username];
+    }
+
     token = USERNAME_TO_TOKEN_MAP[username];
 
     if (!token || !tenantId) {
@@ -137,7 +148,7 @@ function getToken_v2_0(req, res) {
       statusCode = 501;
       reason = 'missing user in map auth map: ' + username + ' token:' + token + ' tenantId:'+ tenantId;
     }
-    else if (token !== req.body.auth.token.id) {
+    else if (token !== providedToken) {
       fail = true;
       statusCode = 502;
       reason = 'invalid token';
