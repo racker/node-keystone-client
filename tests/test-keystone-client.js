@@ -44,7 +44,7 @@ exports.test_getTenantInfo = function(test, assert) {
 
   async.waterfall([
     function testInexistentTenantId(callback) {
-      client.getTenantInfo('inexistent', function(err, data) {
+      client.getTenantInfo('inexistent', {}, function(err, data) {
         assert.ok(err);
         assert.equal(err.statusCode, 404);
         callback();
@@ -52,7 +52,7 @@ exports.test_getTenantInfo = function(test, assert) {
     },
 
     function testValidTenantId(callback) {
-      client.getTenantInfo('7777', function(err, data) {
+      client.getTenantInfo('7777', {}, function(err, data) {
         assert.ifError(err);
         assert.ok(data);
         callback();
@@ -68,7 +68,7 @@ exports.test_getTenantInfo = function(test, assert) {
 exports.test_getServiceCatalog = function(test, assert) {
   var client = new KeystoneClient('http://127.0.0.1:23542/v2.0', {'username': 'joe', 'apiKey': 'dev'});
 
-  client.getServiceCatalog(function(err, data) {
+  client.getServiceCatalog({}, function(err, data) {
     assert.ifError(err);
     assert.ok(data);
     assert.ok(data.length > 1);
@@ -79,7 +79,7 @@ exports.test_getServiceCatalog = function(test, assert) {
 exports.test_getTenantIdAndToken = function(test, assert) {
   var client = new KeystoneClient('http://127.0.0.1:23542/v2.0', {'username': 'joe', 'apiKey': 'dev'});
 
-  client.getTenantIdAndToken(function(err, data) {
+  client.getTenantIdAndToken({}, function(err, data) {
     assert.ifError(err);
     assert.ok(data);
     assert.equal(data.token, 'dev');
