@@ -5,9 +5,10 @@
   "contributors": [
     "Paul Querna <pquerna@apache.org>",
     "Dan Di Spaltro <daniel.dispaltro@rackspace.com>",
-    "Tomaz Muraus <tomaz.muraus@rackspace.com>"
+    "Tomaz Muraus <tomaz.muraus@rackspace.com>",
+    "Josh Guice <josh.guice@rackspace.com>"
   ],
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/racker/node-keystone-client",
   "repository": {
     "type": "git",
